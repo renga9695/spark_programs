@@ -19,3 +19,6 @@ ujesh= kowsi.map(lambda m : (m.split(" ")[6].split("/")[1],1))
 balaji=ujesh.reduceByKey(add)
 
 balaji.saveAsTextFiles("hdfs://nn01.itversity.com/user/shashankbh/jarvis/data/flume/conf")
+
+appa.start()
+appa.awaitTermination()
