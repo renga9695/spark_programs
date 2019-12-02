@@ -1,5 +1,4 @@
 from pyspark import SparkConf,SparkContext
-from pyspark.sql import SparkSession
 from pyspark.streaming import StreamingContext
 from pyspark.streaming.flume import FlumeUtils
 import sys
