@@ -8,11 +8,10 @@ hostname= sys.argv[1]
 port= sys.argv[2]
 renga = SparkConf().setMaster("yarn-client").setAppName("karthik")
 amma= SparkContext(conf=renga)
-
 appa=StreamingContext(amma,30)
 rajagopal= FlumeUtils.createPollingStream(appa,hostname,port)
+rajagopal.persist(pyspark.storageLevel.useMemory)
 mohan= rajagopal.map(lambda m:m[1])
-
 kowsi= mohan.flatMap(lambda fm : fm.split(" ")[6] == "deparment")
 ujesh= kowsi.map(lambda m : (m.split(" ")[6].split("/")[1],1))
 balaji=ujesh.reduceByKey(add)
