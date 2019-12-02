@@ -7,17 +7,15 @@ from operator import add
 from pyspark.sql import functions
 hostname= sys.argv[1]
 port= sys.argv[2]
-output=sys.argv[3]
 renga = SparkConf().setMaster("yarn-client").setAppName("karthik")
 amma= SparkContext(conf=renga)
 
 appa=StreamingContext(amma,30)
-rajagopal= FlumeUtils.createStream(appa,hostname,port)
+rajagopal= FlumeUtils.createPollingStream(appa,hostname,port)
+mohan= rajagopal.map(lambda m:m[1])
 
-kowsi= rajagopal.flatMap(lambda fm : fm.split(" ")[6] == "deparment")
+kowsi= mohan.flatMap(lambda fm : fm.split(" ")[6] == "deparment")
 ujesh= kowsi.map(lambda m : (m.split(" ")[6].split("/")[1],1))
 balaji=ujesh.reduceByKey(add)
 
-appa.start()
-appa.awaitTermination()
-balaji.saveAsTextFiles(output)
+balaji.saveAsTextFiles("hdfs://nn01.itversity.com/user/shashankbh/jarvis/data/flume/conf")
