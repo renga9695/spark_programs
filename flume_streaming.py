@@ -8,7 +8,7 @@ from pyspark.sql import functions
 hostname= sys.argv[1]
 port= sys.argv[2]
 output=sys.argv[3]
-renga = SparkConf().setMaster("local").setAppName("karthik")
+renga = SparkConf().setMaster("yarn-client").setAppName("karthik")
 amma= SparkContext(conf=renga)
 
 appa=StreamingContext(amma,30)
