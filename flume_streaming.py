@@ -18,4 +18,6 @@ kowsi= rajagopal.flatMap(lambda fm : fm.split(" ")[6] == "deparment")
 ujesh= kowsi.map(lambda m : (m.split(" ")[6].split("/")[1],1))
 balaji=ujesh.reduceByKey(add)
 
+appa.start()
+appa.awaitTermination()
 balaji.saveAsTextFiles(output)
