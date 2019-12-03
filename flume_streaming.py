@@ -4,7 +4,7 @@ from pyspark.storagelevel import StorageLevel
 from pyspark.streaming.flume import FlumeUtils
 from operator import add
 
-renga= SparkConf().setAppName("vijay").setMaster("yarn-client")
+renga= SparkConf().setMaster("yarn-client").setAppName("vijay")
 amma= SparkContext(conf=renga)
 appa=StreamingContext(amma,30)
 addresses= [("gw02.itversity.com",12354)]
