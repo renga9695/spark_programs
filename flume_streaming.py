@@ -1,16 +1,12 @@
-from pyspark import SparkConf,SparkContext
+from pyspark.sql import SparkSession
 from pyspark.streaming import StreamingContext
 from pyspark.storagelevel import StorageLevel
 from pyspark.streaming.flume import FlumeUtils
-import sys
 from operator import add
-from pyspark.sql import functions
-hostname= sys.argv[1]
-port= sys.argv[2]
-renga = SparkConf().setMaster("yarn-client").setAppName("karthik")
-amma= SparkContext(conf=renga)
+
+amma = SparkSession().builder.appName("karthik").master("yarn-client").getOrCreate()
 appa=StreamingContext(amma,30)
-addresses= [(hostname,port)]
+addresses= [("gw02.itversity.com",12354)]
 rajagopal= FlumeUtils.createPollingStream(appa,addresses,storageLevel=StorageLevel.MEMORY_AND_DISK_2)
 mohan= rajagopal.map(lambda m:m[1])
 kowsi= mohan.flatMap(lambda fm : fm.split(" ")[6] == "deparment")
