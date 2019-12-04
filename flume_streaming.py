@@ -3,6 +3,7 @@ from pyspark.streaming import StreamingContext
 from pyspark.storagelevel import StorageLevel
 from pyspark.streaming.flume import FlumeUtils
 from operator import add
+import sys
 
 renga= SparkConf().setMaster("yarn-client").setAppName("vijay")
 amma= SparkContext(conf=renga)
@@ -13,8 +14,8 @@ mohan= rajagopal.map(lambda m:m[1])
 kowsi= mohan.flatMap(lambda fm : fm.split(" ")[6] == "deparment")
 ujesh= kowsi.map(lambda m : (m.split(" ")[6].split("/")[1],1))
 balaji=ujesh.reduceByKey(add)
-
-balaji.saveAsTextFiles("hdfs://nn01.itversity.com/user/shashankbh/jarvis/data/flume/conf")
+output=sys.argv[1]
+balaji.saveAsTextFiles(output)
 
 appa.start()
 appa.awaitTermination()
