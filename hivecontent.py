@@ -5,7 +5,7 @@ appa = SparkSession.\
     builder.\
     appName("ahamed").\
     master("yarn-client").\
-    config("sspark.sql.warehouse.dir","hdfs://nn01.itversity.com:8020/apps/hive/warehouse/jarvis.db/").\
+    config("spark.sql.warehouse.dir","hdfs://nn01.itversity.com:8020/apps/hive/warehouse/").\
     getOrCreate()
 
 
