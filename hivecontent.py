@@ -9,7 +9,7 @@ appa = SparkSession.\
     getOrCreate()
 
 
-appa.sql("use jarvis")
-amma= appa.sql('select * from crime3 where primary_type = "THEFT" limit 10')
+
+amma= appa.sql('select * from jarvis.crime3 where primary_type = "THEFT" limit 10')
 amma.show()
 
