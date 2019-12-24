@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-
+from pyspark.sql import SQLContext
 
 appa = SparkSession.\
     builder.\
@@ -11,7 +11,6 @@ appa = SparkSession.\
     getOrCreate()
 
 
-appa.sql("use jarvis")
-amma= appa.sql('select * from crime3')
-amma.show()
-
+amma= SQLContext(appa)
+rajagopal= amma.sql("select * from jarvis.crime")
+rajagopal.show()
