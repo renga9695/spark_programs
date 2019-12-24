@@ -12,5 +12,6 @@ appa = SparkSession.\
 
 
 amma= SQLContext(appa)
-rajagopal= amma.sql("select * from jarvis.crime")
+amma.sql("use jarvis")
+rajagopal= amma.sql("select * from crime")
 rajagopal.show()
