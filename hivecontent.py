@@ -13,5 +13,5 @@ appa = SparkSession.\
 
 amma= SQLContext(appa)
 amma.sql("use jarvis")
-rajagopal= amma.sql("select * from crime")
+rajagopal= amma.sql("select primary_type,year from crime where year = '2017'")
 rajagopal.show()
