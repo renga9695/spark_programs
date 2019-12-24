@@ -11,7 +11,7 @@ appa = SparkSession.\
     getOrCreate()
 
 
-
-amma= appa.sql('select * from crime3 limit 10')
+appa.sql("use jarvis")
+amma= appa.sql('select * from crime3')
 amma.show()
 
