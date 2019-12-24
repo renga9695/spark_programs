@@ -6,11 +6,11 @@ appa = SparkSession.\
     appName("ahamed").\
     master("yarn-client").\
     config("hive.metastore.uris","thrift://rm01.itversity.com:9083").\
-    config("spark.sql.warehouse.dir","hdfs://nn01.itversity.com:8020/apps/hive/warehouse/").\
+    config("spark.sql.warehouse.dir","hdfs://nn01.itversity.com:8020/apps/hive/warehouse/jarvis/amma").\
     getOrCreate()
 
 
 
-amma= appa.sql('select * from jarvis.crime3 where primary_type = "THEFT" limit 10')
+amma= appa.sql('insert into table amma partition(yeared) select * from crime3')
 amma.show()
 
