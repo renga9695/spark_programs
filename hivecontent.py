@@ -12,6 +12,6 @@ appa = SparkSession.\
 
 
 
-amma= appa.sql('select * from crime3 where limit 10')
+amma= appa.sql('select * from crime3 limit 10')
 amma.show()
 
