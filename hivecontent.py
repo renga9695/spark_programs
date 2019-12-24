@@ -12,6 +12,6 @@ appa = SparkSession.\
 
 
 
-amma= appa.sql('insert into table amma partition(yeared) select * from crime3')
+amma= appa.sql('select * from crime3 where limit 10')
 amma.show()
 
