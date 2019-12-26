@@ -18,5 +18,5 @@ appa = SparkSession.\
 amma= SQLContext(appa)
 amma.sql("use jarvis")
 rajagopal= amma.sql("select * from crime3")
-mohan=rajagopal.write.mode("Append").partitionBy("yeared").insertInto("appa",overwrite=False)
+mohan=rajagopal.write.mode("Append").insertInto("appa",overwrite=False)
 mohan.show()
