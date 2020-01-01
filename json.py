@@ -6,5 +6,5 @@ renga = SparkSession.\
         master("yarn").\
         getOrCreate()
 
-amma= renga.read.json("/user/shashankbh/jarvis/git/*")
+amma= renga.read.json("/user/shashankbh/jarvis/git/2019-8.json.gz")
 amma.show()
