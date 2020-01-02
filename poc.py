@@ -2,11 +2,11 @@ from pyspark.sql import SparkSession,SQLContext
 from pyspark.sql.types import IntegerType,DoubleType
 from pyspark.sql.functions import *
 
-renga = SparkSession.builder.appName("poc").master("local").\
+renga = SparkSession.builder.appName("poc").master("yarn-client").\
     getOrCreate()
 
-amma_orders= renga.read.csv("E:\itversity\orders.csv",header="True")
-amma_orders_items= renga.read.csv("E:\itversity\order_items.csv",header="True")
+amma_orders= renga.read.csv("/user/shashankbh/jarvis/tables/retail_db/retail_db/orders/part-00000")
+amma_orders_items= renga.read.csv("/user/shashankbh/jarvis/tables/retail_db/retail_db/order_items/part-00000")
 orders=amma_orders.withColumn("order_id",amma_orders.order_id.cast(IntegerType())).\
                     withColumn("order_customer_id",amma_orders.order_customer_id.cast(IntegerType()))
 order_items= amma_orders_items.withColumn("order_item_id",amma_orders_items.order_item_id.cast(IntegerType())).\
@@ -18,10 +18,16 @@ order_items= amma_orders_items.withColumn("order_item_id",amma_orders_items.orde
 orders.createOrReplaceTempView("order_table")
 order_items.createOrReplaceTempView("order_items_table")
 
-total=orders.\
+"""total=orders.\
     where(orders.order_status.isin("COMPLETE","CLOSED")).\
     join(order_items,orders.order_id==order_items.order_item_order_id).\
-    where(substring(orders.order_date,1,7)== "2014-06")
+    where(substring(orders.order_date,1,7)== "2014-06")"""
 
-kowsi=total.groupBy(total.order_id).agg(sum(total.order_item_subtotal))
-print(kowsi)
+
+rajagopal=renga.sql('select * from order_table ot join order_items_table oit ON ot.order_id=oit.order_item_order_id where ot.order_status is in("COMPLETE","CLOSED") AND substring(ot.order_date,1,7) == "2014-06"')
+
+rajagopal.show()
+kowsi=rajagopal.groupBy(rajagopal.order_id).agg(sum(rajagopal.order_item_subtotal))
+kowsi.show()
+
+
