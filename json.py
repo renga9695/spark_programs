@@ -6,5 +6,6 @@ renga = SparkSession.\
         master("yarn-client").\
         getOrCreate()
 
-amma= renga.read.json("/user/shashankbh/jarvis/git/2019-*.json.gz")
+amma= renga.read.json("/user/shashankbh/jarvis/git/*.json.gz")
+amma.printSchema()
 amma.show()
